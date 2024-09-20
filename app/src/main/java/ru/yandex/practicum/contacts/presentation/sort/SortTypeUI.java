@@ -2,26 +2,27 @@ package ru.yandex.practicum.contacts.presentation.sort;
 
 import androidx.annotation.NonNull;
 
-public class SortTypeUI {
+import java.util.Objects;
 
-    private final String type;
-    private final boolean isSelected;
+import ru.yandex.practicum.contacts.presentation.base.ContactsOrderTypeUi;
+import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
+
+public class SortTypeUI extends ContactsOrderTypeUi implements ListDiffInterface<SortTypeUI> {
+
+
 
     public SortTypeUI(@NonNull String type, boolean isSelected) {
-        this.type = type;
-        this.isSelected = isSelected;
+        super(type,isSelected);
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
+    @Override
     public String createLogMessage() {
         return "Выбран тип сортировки: " + type;
+    }
+
+    @Override
+    public boolean theSameAs(SortTypeUI nextSortTypeUI) {
+        return Objects.equals(this.getType(), nextSortTypeUI.getType());
     }
 
     @Override
